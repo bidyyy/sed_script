@@ -1,4 +1,4 @@
-#!/bin/sed -nf
+#!/bin/sed -nrf
 # Autor: Gaétan Becker
 # Github login: bidyyy
 # Email: <gaetbe.68@gmail.com>
@@ -15,14 +15,14 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /\/\*/ {
-  /^.+\/\*.*$/ { s/\/\*.*$//g;p }
+  /^.+\/\*.*$/ { s/((.*;)+).*\/\*.*$/\1/g;p }
   :start
-  /\*\// { h; d }
+  /\*\// { d }
   N;
   b start
 }
 /\/\// {
   /^\/\//d
-  s/\/\/.*$//g
+  s/((.*;)+)(.*\/\/.*)$/\1/1
 }
 p
